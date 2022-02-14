@@ -239,17 +239,23 @@ for i, v in pairs(game.Players:GetPlayers()) do
 	end
 end
 
-game.Players.ChildAdded:Connect(function(v)
-	if game.Players:GetPlayerFromCharacter(workspace[v.Name]) then
-		local plr = game.Players:GetPlayerFromCharacter(workspace[v.Name])
-		repeat wait() until plr.Character
-		
-		if plr and plr.Character then
-			makeASTGui(plr.Character)
+spawn(function()
+	while wait(5) do
+		for i, v in pairs(game.Players:GetPlayers()) do
+			if v ~= game.Players.LocalPlayer then
+				if v:IsInGroup(10299170) then
+					if v.Character then
+						if v.Character.HumanoidRootPart:FindFirstChild("AST") then
+							--do nothing
+						else
+							makeASTGui(v.Character)
+						end
+					end
+				end
+			end
 		end
 	end
 end)
-
 local hbcon = game:GetService("RunService").RenderStepped:Connect(function()
 	for i, v in pairs(astGuis) do
 		v:FindFirstChild("Dist").Text = round((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Parent.Position).magnitude).." studs"
