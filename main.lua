@@ -1,6 +1,6 @@
 -- Made by Specifix5
 
-local Update = "Added Better lighting, Added Remove Fog option, and most importantly; Added this gui :3"
+local Update = "Added Better lighting, added 'Remove Fog' option, added Outlines (Toggleable) for buildmode only. And most importantly, this gui! Have a great day. :3"
 
 local camLock = false
 
