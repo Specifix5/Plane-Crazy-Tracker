@@ -15,63 +15,13 @@ local tbCon = nil
 local sbCon = nil
 
 local shiftLock = false
+local outline = false
 
 local astGuis = {}
 
 local function round(n)
 	return math.floor(n + 0.5)
 end
-
---setup lighting
-
-game.Lighting.EnvironmentDiffuseScale = 1
-game.Lighting.EnvironmentSpecularScale = 1
-game.Lighting.Brightness = 1.2
-
-if game.Lighting:FindFirstChildOfClass("ColorCorrectionEffect") then
-	game.Lighting:FindFirstChildOfClass("ColorCorrectionEffect"):Destroy()
-end
-
-if game.Lighting:FindFirstChildOfClass("Sky") then
-	game.Lighting:FindFirstChildOfClass("Sky"):Destroy()
-end
-wait()
-
-game.Lighting.SunRays.Intensity = 0.1
-game.Lighting.SunRays.Spread = 0.8
-
-game.Lighting.ClockTime = 14
-
-local colorCr = Instance.new("ColorCorrectionEffect", game.Lighting)
-colorCr.Brightness = 0.01
-colorCr.Contrast = 0.15
-colorCr.Saturation = 0.05
-colorCr.Enabled = true
-
-local sky = Instance.new("Sky", game.Lighting)
-sky.MoonTextureId = "rbxasset://sky/moon.jpg"
-sky.SkyboxBk = "http://www.roblox.com/asset/?id=91458024"
-sky.SkyboxDn = "http://www.roblox.com/asset/?id=91457980"
-sky.SkyboxFt = "http://www.roblox.com/asset/?id=91458024"
-sky.SkyboxLf = "http://www.roblox.com/asset/?id=91458024"
-sky.SkyboxRt = "http://www.roblox.com/asset/?id=91458024"
-sky.SkyboxUp = "http://www.roblox.com/asset/?id=91458002"
-sky.StarCount = 1336
-sky.SunAngularSize = 6
-sky.MoonAngularSize = 4
-sky.SunTextureId = "rbxasset://sky/sun.jpg"
-
-if game.Lighting:FindFirstChildOfClass("Atmosphere") then
-	game.Lighting:FindFirstChildOfClass("Atmosphere"):Destroy()
-end
-
-local as = Instance.new("Atmosphere", game.Lighting)
-as.Color = Color3.fromRGB(199, 199, 199)
-as.Decay = Color3.fromRGB(106, 112, 125)
-as.Glare = 0.4
-as.Haze = 0
-as.Density = 0.2
-as.Offset= 0.25
 
 local function makeTargetGui(target)
 	if targetGui then
@@ -258,6 +208,20 @@ local function makeGui()
 	tb.PlaceholderText = "Enter a name here.."
 	tb.Text = ""
 	
+	local frame1 = Instance.new("Frame", gui)
+	frame1.Position = UDim2.new(0.37, 0, 0, 0)
+	frame1.Size = UDim2.new(0.213, 0, 0.056, 0)
+	frame1.BackgroundColor3 = Color3.fromRGB(0,0,0)
+	frame1.BorderSizePixel = 3
+	frame1.ZIndex = -1
+	
+	local frame2 = Instance.new("Frame", gui)
+	frame2.Position = UDim2.new(0.919, 0, 0.411, 0)
+	frame2.Size = UDim2.new(0.81, 0, 0.144, 0)
+	frame2.BackgroundColor3 = Color3.fromRGB(0,0,0)
+	frame2.BorderSizePixel = 3
+	frame2.ZIndex = -1
+	
 	local sb = Instance.new("TextButton", gui)
 	sb.Position = UDim2.new(0.376, 0, 0.011, 0)
 	sb.Size = UDim2.new(0.042, 0, 0.035, 0)
@@ -266,6 +230,81 @@ local function makeGui()
 	sb.Text = "Remove Fog"
 	sb.TextWrapped = true
 	sb.BorderSizePixel = 0
+	
+	local sba = Instance.new("TextButton", gui)
+	sba.Position = UDim2.new(0.93, 0, 0.491, 0)
+	sba.Size = UDim2.new(0.061, 0, 0.046, 0)
+	sba.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+	sba.TextColor3 = Color3.fromRGB(0,0,0)
+	sba.Text = "Toggle Outline (Build Mode)"
+	sba.TextWrapped = true
+	sba.BorderSizePixel = 0
+	
+	local sbe = Instance.new("TextButton", gui)
+	sbe.Position = UDim2.new(0.93, 0, 0.427, 0)
+	sbe.Size = UDim2.new(0.061, 0, 0.046, 0)
+	sbe.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
+	sbe.TextColor3 = Color3.fromRGB(0,0,0)
+	sbe.Text = "Better Lighting"
+	sbe.TextWrapped = true
+	sbe.BorderSizePixel = 0
+	sbe.TextScaled = true
+	
+	sbe.MouseButton1Down:Connect(function()
+		game.Lighting.EnvironmentDiffuseScale = 1
+		game.Lighting.EnvironmentSpecularScale = 1
+		game.Lighting.Brightness = 1.2
+
+		if game.Lighting:FindFirstChildOfClass("ColorCorrectionEffect") then
+			game.Lighting:FindFirstChildOfClass("ColorCorrectionEffect"):Destroy()
+		end
+
+		if game.Lighting:FindFirstChildOfClass("Sky") then
+			game.Lighting:FindFirstChildOfClass("Sky"):Destroy()
+		end
+		wait()
+		
+		if game.Lighting:FindFirstChildOfClass("SunRaysEffect") then
+			game.Lighting:FindFirstChildOfClass("SunRaysEffect"):Destroy()
+		end
+		
+		local sunRays = Instance.new("SunRaysEffect", game.Lighting)
+		sunRays.Intensity = 0.1
+		sunRays.Spread = 0.8
+
+		game.Lighting.ClockTime = 14
+
+		local colorCr = Instance.new("ColorCorrectionEffect", game.Lighting)
+		colorCr.Brightness = 0.01
+		colorCr.Contrast = 0.15
+		colorCr.Saturation = 0.05
+		colorCr.Enabled = true
+
+		local sky = Instance.new("Sky", game.Lighting)
+		sky.MoonTextureId = "rbxasset://sky/moon.jpg"
+		sky.SkyboxBk = "http://www.roblox.com/asset/?id=91458024"
+		sky.SkyboxDn = "http://www.roblox.com/asset/?id=91457980"
+		sky.SkyboxFt = "http://www.roblox.com/asset/?id=91458024"
+		sky.SkyboxLf = "http://www.roblox.com/asset/?id=91458024"
+		sky.SkyboxRt = "http://www.roblox.com/asset/?id=91458024"
+		sky.SkyboxUp = "http://www.roblox.com/asset/?id=91458002"
+		sky.StarCount = 1336
+		sky.SunAngularSize = 6
+		sky.MoonAngularSize = 4
+		sky.SunTextureId = "rbxasset://sky/sun.jpg"
+
+		if game.Lighting:FindFirstChildOfClass("Atmosphere") then
+			game.Lighting:FindFirstChildOfClass("Atmosphere"):Destroy()
+		end
+
+		local as = Instance.new("Atmosphere", game.Lighting)
+		as.Color = Color3.fromRGB(199, 199, 199)
+		as.Decay = Color3.fromRGB(106, 112, 125)
+		as.Glare = 0.4
+		as.Haze = 0
+		as.Density = 0.2
+		as.Offset= 0.25
+	end)
 
 	if textbox then
 		textbox:Destroy()
@@ -306,6 +345,68 @@ local function makeGui()
 		game.Lighting.FogEnd = math.huge
 		game.Lighting.FogStart = math.huge
 	end)
+	
+	sba.MouseButton1Click:Connect(function()
+		if outline == false then
+			outline = true
+			sba.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+			if workspace:FindFirstChild("PlayerAircraft") and workspace:FindFirstChild("PlayerAircraft")[game.Players.LocalPlayer.Name] then
+				for i, v in pairs(workspace.PlayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
+					if v:IsA("BasePart") and (not v:FindFirstChild("Outline")) then
+						local outline = Instance.new("SelectionBox", v)
+						outline.Adornee = v
+						outline.Color3 = Color3.fromRGB(0,0,0)
+						outline.SurfaceColor3 = Color3.fromRGB(0,0,0)
+						outline.LineThickness = 0.001
+						outline.Transparency = 0.8
+						outline.Name = "Outline"
+					end
+				end
+			end
+		else
+			outline = false
+			sba.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+			if workspace:FindFirstChild("PlayerAircraft") and workspace:FindFirstChild("PlayerAircraft")[game.Players.LocalPlayer.Name] then
+				for i, v in pairs(workspace.PlayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
+					if v:IsA("BasePart") and (v:FindFirstChild("Outline")) then
+						v:FindFirstChild("Outline"):Destroy()
+					end
+				end
+			end
+		end
+	end)
+	
+	for i, v in pairs(gui:GetDescendants()) do
+		if v:IsA("TextLabel") or v:IsA("TextButton") or v:IsA("TextBox") then
+			v.Font = Enum.Font.SourceSans
+			v.TextScaled = true
+			v.TextWrapped = true
+			
+			if v:IsA("TextButton") then
+				v.MouseEnter:Connect(function()
+					local sound = Instance.new("Sound", v)
+					sound.SoundId = "rbxassetid://6042053626"
+					sound:Play()
+
+					sound.Ended:Wait()
+					wait(.2)
+					sound:Destroy()
+				end)
+
+				v.MouseButton1Down:Connect(function()
+					local sound = Instance.new("Sound", v)
+					sound.SoundId = "rbxassetid://3868133279"
+					sound:Play()
+
+
+					sound.Ended:Wait()
+					wait(.2)
+					sound:Destroy()
+				end)
+			end
+		end
+		
+	end
 end
 
 local function makeUpdateGui()
@@ -399,8 +500,22 @@ for i, v in pairs(game.Players:GetPlayers()) do
 	end
 end
 
-spawn(function()
-	while wait(5) do
+local hbcon = game:GetService("RunService").RenderStepped:Connect(function()
+	for i, v in pairs(astGuis) do
+		v:FindFirstChild("Dist").Text = round((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Parent.Position).magnitude).." studs"
+		v:FindFirstChild("Speed").Text = round((v.Parent.Velocity).magnitude).." sps"
+	end
+	
+	if camLock == true and targetGui ~= nil then
+		workspace.CurrentCamera.CFrame = CFrame.lookAt(workspace.CurrentCamera.CFrame.p, targetGui.Parent.Position)
+	end
+end)
+
+local db = false
+
+local hbcon2 = game:GetService("RunService").Heartbeat:Connect(function()
+	if outline == true and db == false then
+		db = true
 		for i, v in pairs(game.Players:GetPlayers()) do
 			if v ~= game.Players.LocalPlayer then
 				if v:IsInGroup(10299170) then
@@ -414,18 +529,39 @@ spawn(function()
 				end
 			end
 		end
+		
+		if workspace:FindFirstChild("PlayerAircraft") and workspace:FindFirstChild("PlayerAircraft")[game.Players.LocalPlayer.Name] then
+			for i, v in pairs(workspace.PlayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
+				if v:IsA("BasePart") and (not v:FindFirstChild("Outline")) then
+					local outline = Instance.new("SelectionBox", v)
+					outline.Adornee = v
+					outline.Color3 = Color3.fromRGB(0,0,0)
+					outline.SurfaceColor3 = Color3.fromRGB(0,0,0)
+					outline.LineThickness = 0.001
+					outline.Transparency = 0.8
+					outline.Name = "Outline"
+				end
+			end
+		end
+		wait(3)
+		db = false
 	end
 end)
-local hbcon = game:GetService("RunService").RenderStepped:Connect(function()
-	for i, v in pairs(astGuis) do
-		v:FindFirstChild("Dist").Text = round((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Parent.Position).magnitude).." studs"
-		v:FindFirstChild("Speed").Text = round((v.Parent.Velocity).magnitude).." sps"
-	end
-	
-	if camLock == true and targetGui ~= nil then
-		workspace.CurrentCamera.CFrame = CFrame.lookAt(workspace.CurrentCamera.CFrame.p, targetGui.Parent.Position)
-	end
-end)
+local oCon = nil
+
+if workspace:FindFirstChild("PlayerAircraft") then
+	oCon = workspace:FindFirstChild("PlayerAircraft")[game.Players.LocalPlayer.Name].DescendantAdded:Connect(function(v)
+		if v:IsA("BasePart") and outline == true then
+			local outline = Instance.new("SelectionBox", v)
+			outline.Adornee = v
+			outline.Color3 = Color3.fromRGB(0,0,0)
+			outline.SurfaceColor3 = Color3.fromRGB(0,0,0)
+			outline.LineThickness = 0.001
+			outline.Transparency = 0.8
+			outline.Name = "Outline"
+		end
+	end)
+end
 
 game.Players.LocalPlayer.Character.Humanoid.Died:Connect(function()
 	if targetGui then
@@ -442,6 +578,20 @@ game.Players.LocalPlayer.Character.Humanoid.Died:Connect(function()
 	
 	if hbcon then
 		hbcon:Disconnect()
+	end
+	
+	if hbcon2 then
+		hbcon:Disconnect()
+	end
+	
+	if oCon then
+		oCon:Disconnect()
+	end
+	
+	for i, v in pairs(workspace.PlayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
+		if v:IsA("BasePart") and (v:FindFirstChild("Outline")) then
+			v:FindFirstChild("Outline"):Destroy()
+		end
 	end
 end)
 
