@@ -1,6 +1,6 @@
 -- Made by Specifix5
 
-local Update = "Added this gui hehehehe :3, keep an eye here for future updates!"
+local Update = "Added Better lighting, Added Remove Fog option, and most importantly; Added this gui :3"
 
 local camLock = false
 
@@ -22,6 +22,56 @@ local function round(n)
 	return math.floor(n + 0.5)
 end
 
+--setup lighting
+
+game.Lighting.EnvironmentDiffuseScale = 1
+game.Lighting.EnvironmentSpecularScale = 1
+game.Lighting.Brightness = 1.2
+
+if game.Lighting:FindFirstChildOfClass("ColorCorrectionEffect") then
+	game.Lighting:FindFirstChildOfClass("ColorCorrectionEffect"):Destroy()
+end
+
+if game.Lighting:FindFirstChildOfClass("Sky") then
+	game.Lighting:FindFirstChildOfClass("Sky"):Destroy()
+end
+wait()
+
+game.Lighting.SunRays.Intensity = 0.1
+game.Lighting.SunRays.Spread = 0.8
+
+game.Lighting.ClockTime = 14
+
+local colorCr = Instance.new("ColorCorrectionEffect", game.Lighting)
+colorCr.Brightness = 0.01
+colorCr.Contrast = 0.15
+colorCr.Saturation = 0.05
+colorCr.Enabled = true
+
+local sky = Instance.new("Sky", game.Lighting)
+sky.MoonTextureId = "rbxasset://sky/moon.jpg"
+sky.SkyboxBk = "http://www.roblox.com/asset/?id=91458024"
+sky.SkyboxDn = "http://www.roblox.com/asset/?id=91457980"
+sky.SkyboxFt = "http://www.roblox.com/asset/?id=91458024"
+sky.SkyboxLf = "http://www.roblox.com/asset/?id=91458024"
+sky.SkyboxRt = "http://www.roblox.com/asset/?id=91458024"
+sky.SkyboxUp = "http://www.roblox.com/asset/?id=91458002"
+sky.StarCount = 1336
+sky.SunAngularSize = 6
+sky.MoonAngularSize = 4
+sky.SunTextureId = "rbxasset://sky/sun.jpg"
+
+if game.Lighting:FindFirstChildOfClass("Atmosphere") then
+	game.Lighting:FindFirstChildOfClass("Atmosphere"):Destroy()
+end
+
+local as = Instance.new("Atmosphere", game.Lighting)
+as.Color = Color3.fromRGB(199, 199, 199)
+as.Decay = Color3.fromRGB(106, 112, 125)
+as.Glare = 0.4
+as.Haze = 0
+as.Density = 0.2
+as.Offset= 0.25
 
 local function makeTargetGui(target)
 	if targetGui then
@@ -211,10 +261,11 @@ local function makeGui()
 	local sb = Instance.new("TextButton", gui)
 	sb.Position = UDim2.new(0.376, 0, 0.011, 0)
 	sb.Size = UDim2.new(0.042, 0, 0.035, 0)
-	sb.BackgroundColor3 = Color3.fromRGB(42, 181, 255)
-	sb.TextColor3 = Color3.fromRGB(255,255,255)
-	sb.Text = "Center Mouse"
+	sb.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
+	sb.TextColor3 = Color3.fromRGB(0,0,0)
+	sb.Text = "Remove Fog"
 	sb.TextWrapped = true
+	sb.BorderSizePixel = 0
 
 	if textbox then
 		textbox:Destroy()
@@ -239,7 +290,21 @@ local function makeGui()
 	end)
 	
 	sbCon = sb.MouseButton1Click:Connect(function()
-		game:GetService("UserInputService").MouseBehavior = Enum.MouseBehavior.LockCenter
+		if game.Lighting:FindFirstChildOfClass("Atmosphere") then
+			game.Lighting:FindFirstChildOfClass("Atmosphere"):Destroy()
+		end
+		
+		if game.Lighting:FindFirstChildOfClass("ColorCorrectionEffect") then
+			game.Lighting:FindFirstChildOfClass("ColorCorrectionEffect"):Destroy()
+		end
+		
+		local colorCr = Instance.new("ColorCorrectionEffect", game.Lighting)
+		colorCr.Brightness = 0.01
+		colorCr.Contrast = 0.15
+		colorCr.Saturation = 0.05
+		
+		game.Lighting.FogEnd = math.huge
+		game.Lighting.FogStart = math.huge
 	end)
 end
 
