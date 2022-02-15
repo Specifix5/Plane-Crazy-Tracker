@@ -1,14 +1,20 @@
 -- Made by Specifix5
 
+local Update = "Added this gui hehehehe :3, keep an eye here for future updates!"
+
 local camLock = false
 
 local gui = nil
 local targetGui = nil
 
 local textbox = nil
+local shfBtn = nil
 
 local con = nil
 local tbCon = nil
+local sbCon = nil
+
+local shiftLock = false
 
 local astGuis = {}
 
@@ -184,6 +190,10 @@ local function makeGui()
 	if tbCon then
 		tbCon:Disconnect()
 	end
+	
+	if sbCon then
+		sbCon:Disconnect()
+	end
 
 	gui = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
 	gui.IgnoreGuiInset = true
@@ -197,12 +207,25 @@ local function makeGui()
 	tb.TextColor3 = Color3.fromRGB(255,255,255)
 	tb.PlaceholderText = "Enter a name here.."
 	tb.Text = ""
+	
+	local sb = Instance.new("TextButton", gui)
+	sb.Position = UDim2.new(0.376, 0, 0.011, 0)
+	sb.Size = UDim2.new(0.042, 0, 0.035, 0)
+	sb.BackgroundColor3 = Color3.fromRGB(42, 181, 255)
+	sb.TextColor3 = Color3.fromRGB(255,255,255)
+	sb.Text = "Center Mouse"
+	sb.TextWrapped = true
 
 	if textbox then
 		textbox:Destroy()
 	end
+	
+	if shfBtn then
+		shfBtn:Destroy()
+	end
 
 	textbox = tb
+	shfBtn = sb
 
 	tbCon = tb:GetPropertyChangedSignal("Text"):Connect(function()
 		if game.Players:FindFirstChild(tb.Text) then
@@ -214,11 +237,83 @@ local function makeGui()
 			end
 		end
 	end)
+	
+	sbCon = sb.MouseButton1Click:Connect(function()
+		game:GetService("UserInputService").MouseBehavior = Enum.MouseBehavior.LockCenter
+	end)
+end
+
+local function makeUpdateGui()
+	local upd = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
+	
+	local frame = Instance.new("Frame", upd)
+	frame.Position = UDim2.new(0.262, 0,0.292, 0)
+	frame.Size = UDim2.new(0.474, 0, 0.415, 0)
+	frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+	frame.BorderColor3 = Color3.fromRGB(40, 40, 40)
+	frame.BorderSizePixel = 4
+	
+	local clsBtn = Instance.new("TextButton", frame)
+	clsBtn.Position = UDim2.new(0.807, 0, 0, 0)
+	clsBtn.Size = UDim2.new(0.193, 0, 0.146, 0)
+	clsBtn.Text = "Close"
+	clsBtn.TextScaled = true
+	clsBtn.BackgroundColor3 = Color3.fromRGB(170,0,0)
+	clsBtn.BorderSizePixel = 1
+	clsBtn.Font = Enum.Font.SourceSans
+	clsBtn.TextColor3 = Color3.fromRGB(0,0,0)
+	
+	local HeaderText = Instance.new("TextLabel", frame)
+	HeaderText.Position = UDim2.new(0,0,0,0)
+	HeaderText.Size = UDim2.new(0.807,0,0.146,0)
+	HeaderText.Text = "Welcome, "..game.Players.LocalPlayer.Name.."!"
+	HeaderText.TextSize = 30
+	HeaderText.Font = Enum.Font.RobotoMono
+	HeaderText.BorderSizePixel = 0
+	HeaderText.BackgroundColor3 = Color3.fromRGB(25,25,25)
+	HeaderText.TextColor3 = Color3.fromRGB(255,255,255)
+	
+	local Upd = Instance.new("TextLabel", frame)
+	Upd.Position = UDim2.new(0,0,0.146,0)
+	Upd.Size = UDim2.new(1,0,0.854,0)
+	Upd.Text = "Loading updates.."
+	Upd.TextSize = 25
+	Upd.Font = Enum.Font.SourceSansLight
+	Upd.BorderSizePixel = 0
+	Upd.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+	Upd.TextColor3 = Color3.fromRGB(255,255,255)
+	Upd.TextXAlignment = Enum.TextXAlignment.Left
+	Upd.TextYAlignment = Enum.TextYAlignment.Top
+	Upd.TextWrapped = true
+	
+	wait(0.5)
+	Upd.Text = Update
+	
+	clsBtn.MouseEnter:Connect(function()
+		local sound = Instance.new("Sound", clsBtn)
+		sound.SoundId = "rbxassetid://6042053626"
+		sound:Play()
+		
+		sound.Ended:Wait()
+		wait(.2)
+		sound:Destroy()
+	end)
+	
+	clsBtn.MouseButton1Down:Connect(function()
+		local sound = Instance.new("Sound", clsBtn)
+		sound.SoundId = "rbxassetid://3868133279"
+		sound:Play()
+		
+
+		sound.Ended:Wait()
+		upd:Destroy()
+	end)
 end
 
 wait(1)
 
 makeGui()
+makeUpdateGui()
 
 for i, v in pairs(game.Players:GetPlayers()) do
 	if v ~= game.Players.LocalPlayer then
@@ -292,20 +387,11 @@ local FOV = workspace.CurrentCamera.FieldOfView
 
 game:GetService("UserInputService").InputBegan:Connect(function(input)
 	local inputType = input.UserInputType
-	if inputType == Enum.UserInputType.MouseButton2 then
-		--game:GetService("TweenService"):Create(workspace.CurrentCamera, TweenInfo.new(0.25, Enum.EasingStyle.Sine, Enum.EasingDirection.In), {FieldOfView = 25}):Play()
-	elseif inputType == Enum.UserInputType.MouseButton3 then
+	if inputType == Enum.UserInputType.MouseButton3 then
 		if camLock == false then
 			camLock = true
 		elseif camLock == true then
 			camLock = false
 		end
-	end
-end)    
-
-game:GetService("UserInputService").InputEnded:Connect(function(input)
-	local inputType = input.UserInputType
-	if inputType == Enum.UserInputType.MouseButton2 then
-		--game:GetService("TweenService"):Create(workspace.CurrentCamera, TweenInfo.new(0.25, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {FieldOfView = FOV}):Play()
 	end
 end)    
