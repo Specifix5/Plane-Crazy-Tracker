@@ -350,27 +350,23 @@ local function makeGui()
 		if outline == false then
 			outline = true
 			sba.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
-			if workspace:FindFirstChild("PlayerAircraft") and workspace:FindFirstChild("PlayerAircraft")[game.Players.LocalPlayer.Name] then
-				for i, v in pairs(workspace.PlayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
-					if v:IsA("BasePart") and (not v:FindFirstChild("Outline")) then
-						local outline = Instance.new("SelectionBox", v)
-						outline.Adornee = v
-						outline.Color3 = Color3.fromRGB(0,0,0)
-						outline.SurfaceColor3 = Color3.fromRGB(0,0,0)
-						outline.LineThickness = 0.001
-						outline.Transparency = 0.8
-						outline.Name = "Outline"
-					end
+			for i, v in pairs(workspace.PlayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
+				if v:IsA("BasePart") and (not v:FindFirstChild("Outline")) then
+					local outline = Instance.new("SelectionBox", v)
+					outline.Adornee = v
+					outline.Color3 = Color3.fromRGB(0,0,0)
+					outline.SurfaceColor3 = Color3.fromRGB(0,0,0)
+					outline.LineThickness = 0.001
+					outline.Transparency = 0.8
+					outline.Name = "Outline"
 				end
 			end
 		else
 			outline = false
 			sba.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
-			if workspace:FindFirstChild("PlayerAircraft") and workspace:FindFirstChild("PlayerAircraft")[game.Players.LocalPlayer.Name] then
-				for i, v in pairs(workspace.PlayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
-					if v:IsA("BasePart") and (v:FindFirstChild("Outline")) then
-						v:FindFirstChild("Outline"):Destroy()
-					end
+			for i, v in pairs(workspace.PlayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
+				if v:IsA("BasePart") and (v:FindFirstChild("Outline")) then
+					v:FindFirstChild("Outline"):Destroy()
 				end
 			end
 		end
@@ -530,17 +526,15 @@ local hbcon2 = game:GetService("RunService").Heartbeat:Connect(function()
 			end
 		end
 		
-		if workspace:FindFirstChild("PlayerAircraft") and workspace:FindFirstChild("PlayerAircraft")[game.Players.LocalPlayer.Name] then
-			for i, v in pairs(workspace.PlayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
-				if v:IsA("BasePart") and (not v:FindFirstChild("Outline")) then
-					local outline = Instance.new("SelectionBox", v)
-					outline.Adornee = v
-					outline.Color3 = Color3.fromRGB(0,0,0)
-					outline.SurfaceColor3 = Color3.fromRGB(0,0,0)
-					outline.LineThickness = 0.001
-					outline.Transparency = 0.8
-					outline.Name = "Outline"
-				end
+		for i, v in pairs(workspace.PlayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
+			if v:IsA("BasePart") and (not v:FindFirstChild("Outline")) then
+				local outline = Instance.new("SelectionBox", v)
+				outline.Adornee = v
+				outline.Color3 = Color3.fromRGB(0,0,0)
+				outline.SurfaceColor3 = Color3.fromRGB(0,0,0)
+				outline.LineThickness = 0.001
+				outline.Transparency = 0.8
+				outline.Name = "Outline"
 			end
 		end
 		wait(3)
@@ -549,19 +543,17 @@ local hbcon2 = game:GetService("RunService").Heartbeat:Connect(function()
 end)
 local oCon = nil
 
-if workspace:FindFirstChild("PlayerAircraft") then
-	oCon = workspace:FindFirstChild("PlayerAircraft")[game.Players.LocalPlayer.Name].DescendantAdded:Connect(function(v)
-		if v:IsA("BasePart") and outline == true then
-			local outline = Instance.new("SelectionBox", v)
-			outline.Adornee = v
-			outline.Color3 = Color3.fromRGB(0,0,0)
-			outline.SurfaceColor3 = Color3.fromRGB(0,0,0)
-			outline.LineThickness = 0.001
-			outline.Transparency = 0.8
-			outline.Name = "Outline"
-		end
-	end)
-end
+oCon = workspace:FindFirstChild("PlayerAircraft")[game.Players.LocalPlayer.Name].DescendantAdded:Connect(function(v)
+	if v:IsA("BasePart") and outline == true then
+		local outline = Instance.new("SelectionBox", v)
+		outline.Adornee = v
+		outline.Color3 = Color3.fromRGB(0,0,0)
+		outline.SurfaceColor3 = Color3.fromRGB(0,0,0)
+		outline.LineThickness = 0.001
+		outline.Transparency = 0.8
+		outline.Name = "Outline"
+	end
+end)
 
 game.Players.LocalPlayer.Character.Humanoid.Died:Connect(function()
 	if targetGui then
