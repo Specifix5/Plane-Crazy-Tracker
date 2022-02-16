@@ -1,0 +1,16 @@
+[ CHANGELOG @ 14/2/2022 ]
+- Added this gui :3
+
+[ CHANGELOG @ 15/2/2022 ]
+- Added Remove Fog option
+- Added Better Lighting option
+- Added Building Outlines (Toggleable)
+
+[ CHANGELOG @ 16/2/2022 ]
+- Fixed major bugs
+- GUIs now does not disappear when Player.Character is destroyed / Player Character died.
+
+More Updates soon! Have a great day/night.
+
+[ TODO LIST ]
+- More bug fixes
