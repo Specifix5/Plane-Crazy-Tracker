@@ -1,6 +1,9 @@
 # AST-Tracker-Plane-Crazy
 Recommended Executor: krnl or Synapse X
 
+* KRNL: https://krnl.ca
+* Synapse X: https://x.synapse.to
+
 ## Description:
 Just another plane crazy script, nothing much.. exclusively made for AST (Alliance for Suppressing Toxicity) on Roblox.
 
