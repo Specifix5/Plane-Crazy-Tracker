@@ -1,6 +1,16 @@
 -- Made by Specifix5
 
-local Update = "Added Better lighting, added 'Remove Fog' option, added Outlines (Toggleable) for buildmode only. And most importantly, this gui! Have a great day. :3"
+local Update = ""
+
+local Uscs, Uerr = pcall(function()
+	Update = tostring(game:HttpGet("https://raw.githubusercontent.com/Specifix5/AST-Tracker-Plane-Crazy/main/update.txt"))
+end)
+
+wait()
+
+if Uerr then
+	Update = "There's something wrong trying to load changelogs here.. [ERR :: "..tostring(Uerr).." :: ]"
+end
 
 local camLock = false
 
@@ -13,6 +23,8 @@ local shfBtn = nil
 local con = nil
 local tbCon = nil
 local sbCon = nil
+local sbaCon = nil
+local sbeCon = nil
 
 local shiftLock = false
 local outline = false
@@ -194,10 +206,15 @@ local function makeGui()
 	if sbCon then
 		sbCon:Disconnect()
 	end
+	
+	if sbaCon then
+		sbaCon:Disconnect()
+	end
 
 	gui = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
 	gui.IgnoreGuiInset = true
 	gui.DisplayOrder = 69420
+	gui.ResetOnSpawn = false
 
 	local tb = Instance.new("TextBox", gui)
 	tb.Position = UDim2.new(0.424, 0, 0.012, 0)
@@ -209,22 +226,22 @@ local function makeGui()
 	tb.Text = ""
 	
 	local frame1 = Instance.new("Frame", gui)
-	frame1.Position = UDim2.new(0.37, 0, 0, 0)
-	frame1.Size = UDim2.new(0.213, 0, 0.056, 0)
+	frame1.Position = UDim2.new(0.418, 0, 0, 0)
+	frame1.Size = UDim2.new(0.164, 0, 0.056, 0)
 	frame1.BackgroundColor3 = Color3.fromRGB(0,0,0)
 	frame1.BorderSizePixel = 3
 	frame1.ZIndex = -1
 	
 	local frame2 = Instance.new("Frame", gui)
-	frame2.Position = UDim2.new(0.919, 0, 0.411, 0)
-	frame2.Size = UDim2.new(0.81, 0, 0.144, 0)
+	frame2.Position = UDim2.new(0.93, 0, 0.419, 0)
+	frame2.Size = UDim2.new(0.07, 0, 0.189, 0)
 	frame2.BackgroundColor3 = Color3.fromRGB(0,0,0)
 	frame2.BorderSizePixel = 3
 	frame2.ZIndex = -1
 	
 	local sb = Instance.new("TextButton", gui)
-	sb.Position = UDim2.new(0.376, 0, 0.011, 0)
-	sb.Size = UDim2.new(0.042, 0, 0.035, 0)
+	sb.Position = UDim2.new(0.934, 0, 0.49, 0)
+	sb.Size = UDim2.new(0.061, 0, 0.046, 0)
 	sb.BackgroundColor3 = Color3.fromRGB(255, 255, 0)
 	sb.TextColor3 = Color3.fromRGB(0,0,0)
 	sb.Text = "Remove Fog"
@@ -232,7 +249,7 @@ local function makeGui()
 	sb.BorderSizePixel = 0
 	
 	local sba = Instance.new("TextButton", gui)
-	sba.Position = UDim2.new(0.93, 0, 0.491, 0)
+	sba.Position = UDim2.new(0.934, 0, 0.554, 0)
 	sba.Size = UDim2.new(0.061, 0, 0.046, 0)
 	sba.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
 	sba.TextColor3 = Color3.fromRGB(0,0,0)
@@ -241,16 +258,16 @@ local function makeGui()
 	sba.BorderSizePixel = 0
 	
 	local sbe = Instance.new("TextButton", gui)
-	sbe.Position = UDim2.new(0.93, 0, 0.427, 0)
+	sbe.Position = UDim2.new(0.934, 0, 0.427, 0)
 	sbe.Size = UDim2.new(0.061, 0, 0.046, 0)
-	sbe.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
+	sbe.BackgroundColor3 = Color3.fromRGB(24, 134, 204)
 	sbe.TextColor3 = Color3.fromRGB(0,0,0)
 	sbe.Text = "Better Lighting"
 	sbe.TextWrapped = true
 	sbe.BorderSizePixel = 0
 	sbe.TextScaled = true
 	
-	sbe.MouseButton1Down:Connect(function()
+	sbeCon = sbe.MouseButton1Down:Connect(function()
 		game.Lighting.EnvironmentDiffuseScale = 1
 		game.Lighting.EnvironmentSpecularScale = 1
 		game.Lighting.Brightness = 1.2
@@ -333,20 +350,11 @@ local function makeGui()
 			game.Lighting:FindFirstChildOfClass("Atmosphere"):Destroy()
 		end
 		
-		if game.Lighting:FindFirstChildOfClass("ColorCorrectionEffect") then
-			game.Lighting:FindFirstChildOfClass("ColorCorrectionEffect"):Destroy()
-		end
-		
-		local colorCr = Instance.new("ColorCorrectionEffect", game.Lighting)
-		colorCr.Brightness = 0.01
-		colorCr.Contrast = 0.15
-		colorCr.Saturation = 0.05
-		
 		game.Lighting.FogEnd = math.huge
 		game.Lighting.FogStart = math.huge
 	end)
 	
-	sba.MouseButton1Click:Connect(function()
+	sbaCon = sba.MouseButton1Click:Connect(function()
 		if outline == false then
 			outline = true
 			sba.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
@@ -430,10 +438,11 @@ local function makeUpdateGui()
 	HeaderText.Size = UDim2.new(0.807,0,0.146,0)
 	HeaderText.Text = "Welcome, "..game.Players.LocalPlayer.Name.."!"
 	HeaderText.TextSize = 30
-	HeaderText.Font = Enum.Font.RobotoMono
+	HeaderText.Font = Enum.Font.Highway
 	HeaderText.BorderSizePixel = 0
 	HeaderText.BackgroundColor3 = Color3.fromRGB(25,25,25)
 	HeaderText.TextColor3 = Color3.fromRGB(255,255,255)
+	HeaderText.TextScaled = true
 	
 	local Upd = Instance.new("TextLabel", frame)
 	Upd.Position = UDim2.new(0,0,0.146,0)
@@ -555,7 +564,7 @@ oCon = workspace:FindFirstChild("PlayerAircraft")[game.Players.LocalPlayer.Name]
 	end
 end)
 
-game.Players.LocalPlayer.Character.Humanoid.Died:Connect(function()
+--[[game.Players.LocalPlayer.Character.Humanoid.Died:Connect(function()
 	if targetGui then
 		targetGui:Destroy()
 		wait()
@@ -585,7 +594,7 @@ game.Players.LocalPlayer.Character.Humanoid.Died:Connect(function()
 			v:FindFirstChild("Outline"):Destroy()
 		end
 	end
-end)
+end)]]
 
 wait(.5)
 
