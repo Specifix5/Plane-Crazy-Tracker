@@ -111,7 +111,7 @@ local function makeTargetGui(target)
 	end)
 end
 
-local function makeASTGui(target)
+local function makeASTGui(target, withFunnyImage)
 	local itargetGui = Instance.new("BillboardGui", target.HumanoidRootPart)
 	itargetGui.AlwaysOnTop = true
 	itargetGui.Adornee = target.HumanoidRootPart
@@ -137,6 +137,10 @@ local function makeASTGui(target)
 	img2.Image = "rbxassetid://8822839970"
 	img2.ImageColor3 = Color3.fromRGB(255, 255, 255)
 	img2.Name = "Logo"
+	
+	if withFunnyImage == true then
+		img2.Image = "rbxassetid://9218496025"
+	end
 
 	local ch = Instance.new("TextLabel", itargetGui)
 	ch.BackgroundTransparency = 1
@@ -340,7 +344,11 @@ local function makeGui()
 			print(plr)
 
 			if plr and plr.Character then
-				makeTargetGui(plr.Character)
+				if plr.Name == "jannu07" then
+					makeASTGui(plr.Character, true)
+				else
+					makeTargetGui(plr.Character)
+				end
 			end
 		end
 	end)
