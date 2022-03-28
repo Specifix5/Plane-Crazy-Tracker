@@ -111,7 +111,7 @@ local function makeTargetGui(target)
 	end)
 end
 
-local function makeASTGui(target, withFunnyImage)
+local function makeASTGui(target, isTargetGui, withFunnyImage)
 	local itargetGui = Instance.new("BillboardGui", target.HumanoidRootPart)
 	itargetGui.AlwaysOnTop = true
 	itargetGui.Adornee = target.HumanoidRootPart
@@ -119,6 +119,12 @@ local function makeASTGui(target, withFunnyImage)
 	itargetGui.MaxDistance = math.huge
 	itargetGui.Size = UDim2.new(0,300,0,78)
 	itargetGui.ClipsDescendants = false
+	
+	if targetGui and isTargetGui == true then
+		targetGui:Destroy()
+		wait()
+		targetGui = itargetGui
+	end
 	
 	itargetGui.Name = "AST"
 
@@ -139,7 +145,7 @@ local function makeASTGui(target, withFunnyImage)
 	img2.Name = "Logo"
 	
 	if withFunnyImage == true then
-		img2.Image = "rbxassetid://9218496025"
+		img2.Image = "http://www.roblox.com/asset/?id=9218496000"
 	end
 
 	local ch = Instance.new("TextLabel", itargetGui)
