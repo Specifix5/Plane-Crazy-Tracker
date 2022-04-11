@@ -1,5 +1,5 @@
-local user = "Target"
-local plr = game.Players.LocalPlayer.Name
+local user = "bhbydii1uhdbudqwdd"
+local plr = game.Players.LocalPlayer
 
 local can = true
 
@@ -20,7 +20,7 @@ while wait(.1) do
 			workspace.Gravity = 0
 			local offset = getDestination() - workspace[plr.."Aircraft"].PilotSeat.Seat.Position
 			--workspace.Filename_03Aircraft.PilotSeat.Seat.CFrame = workspace[user.."Aircraft"].PilotSeat.Seat.CFrame * CFrame.new(0, 0, 80)
-			workspace[plr.."Aircraft"].PilotSeat.Seat.Velocity = offset.Unit * ((workspace[user.."Aircraft"].PilotSeat.Seat.Velocity).magnitude * 2)
+			workspace[plr.."Aircraft"].PilotSeat.Seat.Velocity = offset.Unit * 450--((workspace[user.."Aircraft"].PilotSeat.Seat.Velocity).magnitude * 1.25)
 		end
 	end
 end
