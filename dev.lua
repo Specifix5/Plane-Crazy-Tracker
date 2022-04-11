@@ -1,6 +1,43 @@
 local user = "Willing19"
 local plr = game.Players.LocalPlayer.Name
 
+function notify(title, text)
+	game.StarterGui:SetCore("SendNotification", {
+		Title = title; -- Required. Has to be a string!
+		Text = text; -- Required. Has to be a string!
+		Icon = ""; -- Optional, defaults to "" (no icon)
+		Duration = 5; -- Optional, defaults to 5 seconds
+	})
+end
+
+local gui = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
+gui.IgnoreGuiInset = true
+gui.DisplayOrder = 69420
+gui.ResetOnSpawn = false
+
+local tb = Instance.new("TextBox", gui)
+tb.Position = UDim2.new(0.424, 0, 0.012, 0)
+tb.Size = UDim2.new(0.151, 0, 0.035, 0)
+tb.BackgroundTransparency = 0.5
+tb.BackgroundColor3 = Color3.fromRGB(0,0,0)
+tb.TextColor3 = Color3.fromRGB(255,255,255)
+tb.PlaceholderText = "Enter a name here.."
+tb.Text = ""
+
+tbCon = tb:GetPropertyChangedSignal("Text"):Connect(function()
+	if game.Players:FindFirstChild(tb.Text) then
+		local pler = game.Players:GetPlayerFromCharacter(workspace[tb.Text])
+		print(pler)
+
+		if pler and pler.Character and workspace[pler.Name.."Aircraft"].PilotSeat.Seat ~= nil then
+			user = pler.Name
+			notify("Success", "Changed target to: "..pler.Name)
+		else
+			notify("Error", "Unable to find player vehicle")
+		end
+	end
+end)
+
 local can = true
 
 function getDestination()
@@ -10,6 +47,10 @@ end
 
 workspace[plr].Humanoid.Died:Connect(function()
 	can = false
+	tbCon:Disconnect()
+	tbCon = nil
+	gui:Destroy()
+	gui = nil
 end)
 
 while wait(.1) do
