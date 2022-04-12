@@ -28,6 +28,18 @@ workspace[plr].Humanoid.Died:Connect(function()
 	can = false
 end)
 
+for i, v in pairs(workspace.BuildingZones:GetDescendants()) do
+	if v.Name == "BlackListPart" then
+		v:Destroy()
+	end
+end
+
+workspace.BuildingZones.DescendantAdded:Connect(function (v)
+	if v.Name == "BlackListPart" then
+		v:Destroy()
+	end
+end)
+
 while wait(.1) do
 	if can == true then
 		if workspace[plr.."Aircraft"].PilotSeat.Seat == nil then
