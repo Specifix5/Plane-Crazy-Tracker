@@ -1,4 +1,4 @@
-local user = "TARGET_HERE"
+local user = "TARGET HERE"
 local speed = 1250
 local plr = game.Players.LocalPlayer.Name
 
@@ -24,17 +24,9 @@ function getDestination()
     return workspace[user].HumanoidRootPart.Position--.."Aircraft"].PilotSeat.Seat.Position
 end
 
-local blRemover = workspace.BuildingZones.DescendantAdded:Connect(function (v)
-	if v.Name == "BlackListPart" then
-		v:Destroy()
-	end
-end)
-
 
 workspace[plr].Humanoid.Died:Connect(function()
 	can = false
-	blRemover:Disconnect()
-	blRemover = nil
 end)
 
 for i, v in pairs(workspace.BuildingZones:GetDescendants()) do
