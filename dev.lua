@@ -26,10 +26,6 @@ end
 
 workspace[plr].Humanoid.Died:Connect(function()
 	can = false
-	tbCon:Disconnect()
-	tbCon = nil
-	gui:Destroy()
-	gui = nil
 end)
 
 while wait(.1) do
