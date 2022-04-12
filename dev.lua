@@ -1,10 +1,10 @@
-local user = "Willing19"
+local user = "Angel_thedragonkill"
 local plr = game.Players.LocalPlayer.Name
 
 function notify(title, text)
 	game.StarterGui:SetCore("SendNotification", {
-		Title = title; -- Required. Has to be a string!
-		Text = text; -- Required. Has to be a string!
+		Title = tostring(title); -- Required. Has to be a string!
+		Text = tostring(text); -- Required. Has to be a string!
 		Icon = ""; -- Optional, defaults to "" (no icon)
 		Duration = 5; -- Optional, defaults to 5 seconds
 	})
@@ -13,7 +13,7 @@ end
 local gui = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
 gui.IgnoreGuiInset = true
 gui.DisplayOrder = 69420
-gui.ResetOnSpawn = false
+gui.ResetOnSpawn = true
 
 local tb = Instance.new("TextBox", gui)
 tb.Position = UDim2.new(0.424, 0, 0.012, 0)
@@ -65,4 +65,3 @@ while wait(.1) do
 		end
 	end
 end
---loadstring(game:GetObjects("rbxassetid://418957341")[1].Source)()
