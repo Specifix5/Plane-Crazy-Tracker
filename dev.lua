@@ -23,8 +23,8 @@
 	- Priority List, A blacklist sort of thing to make you target the blacklisted user available in blacklist.txt
 --]]
 
-local user = "TARGET HERE" -- Target User here
-local speed = 1250 -- Specified Speed the vehicle will move at
+local user = "TARGET NAME" -- Target User here
+local speed = 4250 -- Specified Speed the vehicle will move at (It is recommended to not go above 1250)
 local plr = game.Players.LocalPlayer.Name
 
 -- Settings
@@ -74,6 +74,9 @@ else
 		end
 
 		can = false
+		local offset = getDestination() - workspace[plr.."Aircraft"].PilotSeat.Seat.Position
+		workspace[plr.."Aircraft"].PilotSeat.Seat.Velocity = offset.Unit * 0
+
 		wait(game.Players.RespawnTime + 3.5)
 
 		repeat wait() until workspace:FindFirstChild(user.."Aircraft") and workspace:FindFirstChild(plr.."Aircraft")
