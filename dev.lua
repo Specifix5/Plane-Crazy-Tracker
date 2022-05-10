@@ -93,6 +93,11 @@ end
 can = true
 
 function getDestination()
+	if not workspace[user]:FindFirstChild("HumanoidRootPart") then
+		repeat wait(.1) until workspace[user]:FindFirstChild("HumanoidRootPart")
+		wait(.1)
+		return workspace[user].HumanoidRootPart.Position
+	end
     -- Up to you to determine where this thing is going!
     return workspace[user].HumanoidRootPart.Position--.."Aircraft"].PilotSeat.Seat.Position
 end
