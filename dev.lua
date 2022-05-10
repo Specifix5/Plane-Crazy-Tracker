@@ -23,7 +23,7 @@
 	- Priority List, A blacklist sort of thing to make you target the blacklisted user available in blacklist.txt
 --]]
 
-local user = "SomewhatAnAccount" -- Target User here
+local user = "TARGET" -- Target User here
 local speed = 2250 -- Specified Speed the vehicle will move at (It is recommended to not go above 1250)
 local plr = game.Players.LocalPlayer.Name
 
