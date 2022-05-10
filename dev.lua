@@ -1,4 +1,4 @@
---[[ 
+--[[  
 	Hello there, whoever is using my script. Is it me Specifix a.k.a your local Filename_03, here's some 
 	basic introduction to using the script.
 
