@@ -1,4 +1,4 @@
--- Made by Specifix5
+-- Made by Specifix5 epic
 
 local Update = ""
 
