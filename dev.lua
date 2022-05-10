@@ -23,7 +23,7 @@
 	- Priority List, A blacklist sort of thing to make you target the blacklisted user available in blacklist.txt
 --]]
 
-local user = "TARGET NAME" -- Target User here
+local user = "TARGET" -- Target User here
 local speed = 2250 -- Specified Speed the vehicle will move at (It is recommended to not go above 1250)
 local plr = game.Players.LocalPlayer.Name
 
@@ -82,7 +82,7 @@ else
 		repeat wait() until (workspace:FindFirstChild(user.."Aircraft") and workspace:FindFirstChild(plr.."Aircraft")) == true
 
 		wait(10)
-		
+
 		playAudio(9576428703)
 		notify("Target Respawned", "Maintaining Velocity to target's position")
 		
@@ -100,10 +100,11 @@ end
 
 workspace[plr].Humanoid.Died:Connect(function()
 	playAudio(9576183844)
-	can = false
 	wait(.1)
 	targetDiedEvent:Disconnect()
 	targetDiedEvent = nil
+	wait(.1)
+	can = false
 end)
 
 for i, v in pairs(workspace.BuildingZones:GetDescendants()) do
