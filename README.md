@@ -11,7 +11,8 @@ Check them out if you have the time <3: https://www.roblox.com/groups/10299170/A
 ## Usage:
 ```lua
 -- Copyright (c) Specifix 2022 Licensed under Creative Commons Attribution 2.0 Generic (CC BY 2.0)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Specifix5/AST-Tracker-Plane-Crazy/main/main.lua"))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Specifix5/Plane-Crazy-Tracker/main/radar-gui.lua"))();
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Specifix5/Plane-Crazy-Tracker/main/autopilot.lua"))();
 ```
 ## Licensing
 This project is licensed under Creative Commons Attribution 2.0 Generic (CC BY 2.0)
