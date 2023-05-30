@@ -3,7 +3,7 @@
 local Update = ""
 
 local Uscs, Uerr = pcall(function()
-	Update = tostring(game:HttpGet("https://raw.githubusercontent.com/Specifix5/AST-Tracker-Plane-Crazy/main/update.txt"))
+	Update = tostring(game:HttpGet("https://raw.githubusercontent.com/Specifix5/Plane-Crazy-Tracker/main/update.txt"))
 end)
 
 wait()
