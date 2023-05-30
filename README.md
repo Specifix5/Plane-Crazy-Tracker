@@ -1,6 +1,4 @@
 # Plane Crazy RADAR GUI & Autopilot
-Autopilot @ dev.lua
-Radar GUI @ main.lua
 Recommended Executor: krnl or Synapse X
 
 * KRNL: https://krnl.ca
