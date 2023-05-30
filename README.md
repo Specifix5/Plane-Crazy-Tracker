@@ -1,4 +1,4 @@
-# AST-Tracker-Plane-Crazy
+# Plane Crazy RADAR GUI & Autopilot
 Recommended Executor: krnl or Synapse X
 
 * KRNL: https://krnl.ca
