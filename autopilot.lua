@@ -16,7 +16,7 @@
 	- Priority List, A blacklist sort of thing to make you target the blacklisted user available in blacklist.txt
 --]]
 
-local user = "TARGET" -- Target User here
+local user = "USER HERE" -- Target User here
 local speed = 3250 -- Specified Speed the vehicle will move at (It is recommended to not go above 1250)
 local plr = game.Players.LocalPlayer.Name
 
@@ -27,6 +27,16 @@ local targetDiedEvent
 
 -- IGNORE THIS -- Wether the script continue to execute and update velocity!
 local can = true
+
+function getDestination()
+	if not workspace[user]:FindFirstChild("HumanoidRootPart") then
+		repeat wait(.1) until workspace[user]:FindFirstChild("HumanoidRootPart")
+		wait(.1)
+		return workspace[user].HumanoidRootPart.Position
+	end
+	-- Up to you to determine where this thing is going!
+	return workspace[user].HumanoidRootPart.Position--.."Aircraft"].PilotSeat.Seat.Position
+end
 
 if not workspace:FindFirstChild("ExecutedOnce") then
 	_e = Instance.new("BoolValue", workspace)
@@ -136,22 +146,12 @@ else
 
 		playAudio(9576428703)
 		notify("Target Respawned", "Maintaining Velocity to target's position")
-		
+
 		can = true
 	end)
 end
 
 can = true
-
-function getDestination()
-	if not workspace[user]:FindFirstChild("HumanoidRootPart") then
-		repeat wait(.1) until workspace[user]:FindFirstChild("HumanoidRootPart")
-		wait(.1)
-		return workspace[user].HumanoidRootPart.Position
-	end
-    -- Up to you to determine where this thing is going!
-    return workspace[user].HumanoidRootPart.Position--.."Aircraft"].PilotSeat.Seat.Position
-end
 
 
 workspace[plr].Humanoid.Died:Connect(function()
@@ -169,7 +169,7 @@ for i, v in pairs(workspace.BuildingZones:GetDescendants()) do
 	end
 end
 
-while wait(.1) do
+local rstep = game:GetService("RunService").RenderStepped:Connect(function()
 	if can == true then
 		if workspace[plr.."Aircraft"].PilotSeat.Seat == nil then
 			workspace.Gravity = 196
@@ -180,4 +180,4 @@ while wait(.1) do
 			workspace[plr.."Aircraft"].PilotSeat.Seat.Velocity = offset.Unit * speed--((workspace[user.."Aircraft"].PilotSeat.Seat.Velocity).magnitude * 1.25)
 		end
 	end
-end
+end)
