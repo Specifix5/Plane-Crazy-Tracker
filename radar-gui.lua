@@ -119,13 +119,13 @@ local function makeASTGui(target, isTargetGui, withFunnyImage)
 	itargetGui.MaxDistance = math.huge
 	itargetGui.Size = UDim2.new(0,300,0,78)
 	itargetGui.ClipsDescendants = false
-	
+
 	if targetGui and isTargetGui == true then
 		targetGui:Destroy()
 		wait()
 		targetGui = itargetGui
 	end
-	
+
 	itargetGui.Name = "AST"
 
 	local img = Instance.new("ImageLabel", itargetGui)
@@ -135,7 +135,7 @@ local function makeASTGui(target, isTargetGui, withFunnyImage)
 	img.Image = "rbxassetid://659155421"
 	img.ImageColor3 = Color3.fromRGB(255, 82, 82)
 	img.Name = "CrosshairOutline"
-	
+
 	local img2 = Instance.new("ImageLabel", itargetGui)
 	img2.BackgroundTransparency = 1
 	img2.Size = UDim2.new(0.2,0,0.8,0)
@@ -143,7 +143,7 @@ local function makeASTGui(target, isTargetGui, withFunnyImage)
 	img2.Image = "rbxassetid://8822839970"
 	img2.ImageColor3 = Color3.fromRGB(255, 255, 255)
 	img2.Name = "Logo"
-	
+
 	if withFunnyImage == true then
 		img2.Image = "http://www.roblox.com/asset/?id=9218496000"
 	end
@@ -169,7 +169,7 @@ local function makeASTGui(target, isTargetGui, withFunnyImage)
 	tName.TextXAlignment = Enum.TextXAlignment.Left
 	tName.TextYAlignment = Enum.TextYAlignment.Top
 	tName.TextStrokeTransparency = 0.8
-	
+
 	tName.Name = "Name"
 
 	local tDist = Instance.new("TextLabel", itargetGui)
@@ -183,7 +183,7 @@ local function makeASTGui(target, isTargetGui, withFunnyImage)
 	tDist.TextXAlignment = Enum.TextXAlignment.Left
 	tDist.TextYAlignment = Enum.TextYAlignment.Center
 	tDist.TextStrokeTransparency = 0.8
-	
+
 	tDist.Name = "Dist"
 
 	local tSpeed = Instance.new("TextLabel", itargetGui)
@@ -197,9 +197,9 @@ local function makeASTGui(target, isTargetGui, withFunnyImage)
 	tSpeed.TextXAlignment = Enum.TextXAlignment.Left
 	tSpeed.TextYAlignment = Enum.TextYAlignment.Bottom
 	tSpeed.TextStrokeTransparency = 0.8
-	
+
 	tSpeed.Name = "Speed"
-	
+
 	table.insert(astGuis, itargetGui)
 
 end
@@ -212,11 +212,11 @@ local function makeGui()
 	if tbCon then
 		tbCon:Disconnect()
 	end
-	
+
 	if sbCon then
 		sbCon:Disconnect()
 	end
-	
+
 	if sbaCon then
 		sbaCon:Disconnect()
 	end
@@ -234,21 +234,21 @@ local function makeGui()
 	tb.TextColor3 = Color3.fromRGB(255,255,255)
 	tb.PlaceholderText = "Enter a name here.."
 	tb.Text = ""
-	
+
 	local frame1 = Instance.new("Frame", gui)
 	frame1.Position = UDim2.new(0.418, 0, 0, 0)
 	frame1.Size = UDim2.new(0.164, 0, 0.056, 0)
 	frame1.BackgroundColor3 = Color3.fromRGB(0,0,0)
 	frame1.BorderSizePixel = 3
 	frame1.ZIndex = -1
-	
+
 	local frame2 = Instance.new("Frame", gui)
 	frame2.Position = UDim2.new(0.93, 0, 0.419, 0)
 	frame2.Size = UDim2.new(0.07, 0, 0.189, 0)
 	frame2.BackgroundColor3 = Color3.fromRGB(0,0,0)
 	frame2.BorderSizePixel = 3
 	frame2.ZIndex = -1
-	
+
 	local sb = Instance.new("TextButton", gui)
 	sb.Position = UDim2.new(0.934, 0, 0.49, 0)
 	sb.Size = UDim2.new(0.061, 0, 0.046, 0)
@@ -257,7 +257,7 @@ local function makeGui()
 	sb.Text = "Remove Fog"
 	sb.TextWrapped = true
 	sb.BorderSizePixel = 0
-	
+
 	local sba = Instance.new("TextButton", gui)
 	sba.Position = UDim2.new(0.934, 0, 0.554, 0)
 	sba.Size = UDim2.new(0.061, 0, 0.046, 0)
@@ -266,7 +266,7 @@ local function makeGui()
 	sba.Text = "Toggle Outline (Build Mode)"
 	sba.TextWrapped = true
 	sba.BorderSizePixel = 0
-	
+
 	local sbe = Instance.new("TextButton", gui)
 	sbe.Position = UDim2.new(0.934, 0, 0.427, 0)
 	sbe.Size = UDim2.new(0.061, 0, 0.046, 0)
@@ -276,7 +276,7 @@ local function makeGui()
 	sbe.TextWrapped = true
 	sbe.BorderSizePixel = 0
 	sbe.TextScaled = true
-	
+
 	sbeCon = sbe.MouseButton1Down:Connect(function()
 		game.Lighting.EnvironmentDiffuseScale = 1
 		game.Lighting.EnvironmentSpecularScale = 1
@@ -290,11 +290,11 @@ local function makeGui()
 			game.Lighting:FindFirstChildOfClass("Sky"):Destroy()
 		end
 		wait()
-		
+
 		if game.Lighting:FindFirstChildOfClass("SunRaysEffect") then
 			game.Lighting:FindFirstChildOfClass("SunRaysEffect"):Destroy()
 		end
-		
+
 		local sunRays = Instance.new("SunRaysEffect", game.Lighting)
 		sunRays.Intensity = 0.1
 		sunRays.Spread = 0.8
@@ -336,7 +336,7 @@ local function makeGui()
 	if textbox then
 		textbox:Destroy()
 	end
-	
+
 	if shfBtn then
 		shfBtn:Destroy()
 	end
@@ -358,21 +358,21 @@ local function makeGui()
 			end
 		end
 	end)
-	
+
 	sbCon = sb.MouseButton1Click:Connect(function()
 		if game.Lighting:FindFirstChildOfClass("Atmosphere") then
 			game.Lighting:FindFirstChildOfClass("Atmosphere"):Destroy()
 		end
-		
+
 		game.Lighting.FogEnd = math.huge
 		game.Lighting.FogStart = math.huge
 	end)
-	
+
 	sbaCon = sba.MouseButton1Click:Connect(function()
 		if outline == false then
 			outline = true
 			sba.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
-			for i, v in pairs(workspace.PlayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
+			for i, v in pairs(workspace.PIayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
 				if v:IsA("BasePart") and (not v:FindFirstChild("Outline")) then
 					local outline = Instance.new("SelectionBox", v)
 					outline.Adornee = v
@@ -386,20 +386,20 @@ local function makeGui()
 		else
 			outline = false
 			sba.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
-			for i, v in pairs(workspace.PlayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
+			for i, v in pairs(workspace.PIayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
 				if v:IsA("BasePart") and (v:FindFirstChild("Outline")) then
 					v:FindFirstChild("Outline"):Destroy()
 				end
 			end
 		end
 	end)
-	
+
 	for i, v in pairs(gui:GetDescendants()) do
 		if v:IsA("TextLabel") or v:IsA("TextButton") or v:IsA("TextBox") then
 			v.Font = Enum.Font.SourceSans
 			v.TextScaled = true
 			v.TextWrapped = true
-			
+
 			if v:IsA("TextButton") then
 				v.MouseEnter:Connect(function()
 					local sound = Instance.new("Sound", v)
@@ -423,20 +423,20 @@ local function makeGui()
 				end)
 			end
 		end
-		
+
 	end
 end
 
 local function makeUpdateGui()
 	local upd = Instance.new("ScreenGui", game.Players.LocalPlayer.PlayerGui)
-	
+
 	local frame = Instance.new("Frame", upd)
 	frame.Position = UDim2.new(0.262, 0,0.292, 0)
 	frame.Size = UDim2.new(0.474, 0, 0.415, 0)
 	frame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
 	frame.BorderColor3 = Color3.fromRGB(40, 40, 40)
 	frame.BorderSizePixel = 4
-	
+
 	local clsBtn = Instance.new("TextButton", frame)
 	clsBtn.Position = UDim2.new(0.807, 0, 0, 0)
 	clsBtn.Size = UDim2.new(0.193, 0, 0.146, 0)
@@ -446,7 +446,7 @@ local function makeUpdateGui()
 	clsBtn.BorderSizePixel = 1
 	clsBtn.Font = Enum.Font.SourceSans
 	clsBtn.TextColor3 = Color3.fromRGB(0,0,0)
-	
+
 	local HeaderText = Instance.new("TextLabel", frame)
 	HeaderText.Position = UDim2.new(0,0,0,0)
 	HeaderText.Size = UDim2.new(0.807,0,0.146,0)
@@ -457,7 +457,7 @@ local function makeUpdateGui()
 	HeaderText.BackgroundColor3 = Color3.fromRGB(25,25,25)
 	HeaderText.TextColor3 = Color3.fromRGB(255,255,255)
 	HeaderText.TextScaled = true
-	
+
 	local Upd = Instance.new("TextLabel", frame)
 	Upd.Position = UDim2.new(0,0,0.146,0)
 	Upd.Size = UDim2.new(1,0,0.854,0)
@@ -470,25 +470,25 @@ local function makeUpdateGui()
 	Upd.TextXAlignment = Enum.TextXAlignment.Left
 	Upd.TextYAlignment = Enum.TextYAlignment.Top
 	Upd.TextWrapped = true
-	
+
 	wait(0.5)
 	Upd.Text = Update
-	
+
 	clsBtn.MouseEnter:Connect(function()
 		local sound = Instance.new("Sound", clsBtn)
 		sound.SoundId = "rbxassetid://6042053626"
 		sound:Play()
-		
+
 		sound.Ended:Wait()
 		wait(.2)
 		sound:Destroy()
 	end)
-	
+
 	clsBtn.MouseButton1Down:Connect(function()
 		local sound = Instance.new("Sound", clsBtn)
 		sound.SoundId = "rbxassetid://3868133279"
 		sound:Play()
-		
+
 
 		sound.Ended:Wait()
 		upd:Destroy()
@@ -524,7 +524,7 @@ local hbcon = game:GetService("RunService").RenderStepped:Connect(function()
 		v:FindFirstChild("Dist").Text = round((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Parent.Position).magnitude).." studs"
 		v:FindFirstChild("Speed").Text = round((v.Parent.Velocity).magnitude).." sps"
 	end
-	
+
 	if camLock == true and targetGui ~= nil then
 		workspace.CurrentCamera.CFrame = CFrame.lookAt(workspace.CurrentCamera.CFrame.p, targetGui.Parent.Position)
 	end
@@ -548,8 +548,8 @@ local hbcon2 = game:GetService("RunService").Heartbeat:Connect(function()
 				end
 			end
 		end
-		
-		for i, v in pairs(workspace.PlayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
+
+		for i, v in pairs(workspace.PIayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
 			if v:IsA("BasePart") and (not v:FindFirstChild("Outline")) then
 				local outline = Instance.new("SelectionBox", v)
 				outline.Adornee = v
@@ -566,7 +566,8 @@ local hbcon2 = game:GetService("RunService").Heartbeat:Connect(function()
 end)
 local oCon = nil
 
-oCon = workspace:FindFirstChild("PlayerAircraft")[game.Players.LocalPlayer.Name].DescendantAdded:Connect(function(v)
+repeat wait() until workspace:FindFirstChild("PIayerAircraft"):FindFirstChild(game.Players.LocalPlayer.Name)
+oCon = workspace:FindFirstChild("PIayerAircraft")[game.Players.LocalPlayer.Name].DescendantAdded:Connect(function(v)
 	if v:IsA("BasePart") and outline == true then
 		local outline = Instance.new("SelectionBox", v)
 		outline.Adornee = v
@@ -577,41 +578,7 @@ oCon = workspace:FindFirstChild("PlayerAircraft")[game.Players.LocalPlayer.Name]
 		outline.Name = "Outline"
 	end
 end)
-
---[[game.Players.LocalPlayer.Character.Humanoid.Died:Connect(function()
-	if targetGui then
-		targetGui:Destroy()
-		wait()
-		targetGui = nil
-	end
-
-	for i, v in pairs(astGuis) do
-		if v then
-			v:Destroy()
-		end
-	end
-	
-	if hbcon then
-		hbcon:Disconnect()
-	end
-	
-	if hbcon2 then
-		hbcon:Disconnect()
-	end
-	
-	if oCon then
-		oCon:Disconnect()
-	end
-	
-	for i, v in pairs(workspace.PlayerAircraft[game.Players.LocalPlayer.Name]:GetDescendants()) do
-		if v:IsA("BasePart") and (v:FindFirstChild("Outline")) then
-			v:FindFirstChild("Outline"):Destroy()
-		end
-	end
-end)]]
-
 wait(.5)
-
 local FOV = workspace.CurrentCamera.FieldOfView
 
 
