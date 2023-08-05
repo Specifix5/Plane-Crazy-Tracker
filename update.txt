@@ -10,6 +10,9 @@
 - Fixed major bugs
 - GUIs now does not disappear when Player.Character is destroyed / Player Character died.
 
+[ CHANGELOG @ 5/8/2023 ]
+- Updated to current plane crazy version (Fixed PlayerAircraft where outlines are not showing)
+
 More Updates soon! Have a great day/night.
 
 [ TODO LIST ]
