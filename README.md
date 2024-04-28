@@ -1,3 +1,5 @@
+# DEPRECATED! WONT BE UPDATED ANYMORE
+
 # Plane Crazy RADAR GUI & Autopilot
 Recommended Executor: krnl or Synapse X
 
