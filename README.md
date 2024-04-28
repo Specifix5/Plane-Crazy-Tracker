@@ -1,4 +1,5 @@
-# DEPRECATED! WONT BE UPDATED ANYMORE
+# DEPRECATED! I WONT BE UPDATING ANYMORE
+Although I will leave this unarchived, in case someone wants to commit a pull request.
 
 # Plane Crazy RADAR GUI & Autopilot
 Recommended Executor: krnl or Synapse X
